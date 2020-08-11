@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.boot.mapper.CityMapper">
+
+    <resultMap type="com.study.boot.bean.City" id="baseResultMap">
+        <id column="id" property="id"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="city_name" property="cityName"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <select id="selectAllCity" resultMap="baseResultMap">
+        select * from city
+    </select>
+
+
+    <select id="selectCity" resultMap="baseResultMap" parameterType="com.study.boot.bean.City">
+        select * from city
+        <where>
+            <if test="id!='' and id!=null ">
+                 and id = #{id}
+            </if>
+            <if test="provinceId!='' and provinceId!=null ">
+                and province_id = #{provinceId}
+            </if>
+            <if test="cityName!='' and cityName!=null ">
+                and city_name = #{cityName}
+            </if>
+            <if test="description!='' and description!=null ">
+                and description = #{description}
+            </if>
+        </where>
+    </select>
+
+</mapper>
